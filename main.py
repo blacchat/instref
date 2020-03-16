@@ -1,5 +1,5 @@
 import csv 
-
+from os import sys 
 
 class Instr: 
     def __init__(self, instr, opcode, valid64, valid32, fflags, op1, op2, op3, op4, tuptype, desc): 
@@ -30,7 +30,19 @@ class Instr:
 def welcome(): 
     print("+=====>x86-64 cheatsheet<=====+")
     print("-------------------------------")
-def main(): 
+def help():
+    print("***********HELP MENU***********")
+    print("search [item] --- searches item")
+    
+def main():
+    if len(sys.argv) != 1:
+        if sys.argv[1] == "--help" or sys.argv[1] == "-h": 
+            help()
+            exit()
+        else: 
+            pass 
+    else: 
+        pass
     welcome() 
     with open("x86.csv") as f:
         z = csv.reader(f, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL, skipinitialspace=True)
@@ -50,6 +62,9 @@ def main():
         elif x[0] == "exit":
             print("Exiting...")
             exit()
-        else: 
-            pass 
+        elif x[0] == "help" or x[0] == "q": 
+            help()
+            pass
+        elif x[0] == "clear": 
+            print("\n"*50)
 main() 
